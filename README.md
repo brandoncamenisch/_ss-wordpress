@@ -8,3 +8,9 @@
 ADD https://github.com/penske-media-corp/_ss-wordpress/archive/master.zip /tmp
 RUN unzip /tmp/master.zip -d /tmp && mv /tmp/_ss-wordpress-master/alpine/* /usr/bin/
 ```
+
+## USAGE IN DOCKER-COMPOSE
+```
+ command: >
+      sh -c "pmc-*"
+```
