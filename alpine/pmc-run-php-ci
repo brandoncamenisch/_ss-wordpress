@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -x
 apk add jq git
 
 commit=$(git rev-parse --short HEAD)

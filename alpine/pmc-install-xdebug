@@ -6,5 +6,4 @@ docker-php-ext-enable xdebug
 echo "xdebug.idekey=${XDEBUG_IDEKEY}" >> /usr/local/etc/php/conf.d/xdebug.ini
 echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini && \
 echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini && \
-echo "xdebug.remote_port=${XDEBUG_PORT}" >> /usr/local/etc/php/conf.d/xdebug.ini && \
-echo "clear_env = no" >> /etc/php/$PHP_VERSION/fpm/pool.d/www.conf
+echo "xdebug.remote_port=${XDEBUG_PORT}" >> /usr/local/etc/php/conf.d/xdebug.ini
