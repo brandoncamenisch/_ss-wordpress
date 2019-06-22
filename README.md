@@ -12,5 +12,5 @@ RUN unzip /tmp/master.zip -d /tmp && mv /tmp/_ss-wordpress-master/alpine/* /usr/
 ## USAGE IN DOCKER-COMPOSE
 ```
  command: >
-      sh -c "pmc-*"
+      sh -c "pmc-{pmc-run-*-ci"
 ```
