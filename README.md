@@ -14,3 +14,7 @@ RUN unzip /tmp/master.zip -d /tmp && mv /tmp/_ss-wordpress-master/alpine/* /usr/
  command: >
       sh -c "pmc-run-{php|npm}-ci"
 ```
+
+## ENVRIONMENT VARIABLES
+
+For the most up to date list of environment variables [see this](https://github.com/penske-media-corp/generator-pmc/generators/docker/templates/wp/.env)
