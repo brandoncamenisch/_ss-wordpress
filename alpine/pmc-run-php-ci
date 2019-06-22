@@ -25,6 +25,7 @@ $COMPOSER_VENDOR_DIR/bin/phpcs --runtime-set text_domain ${TEXT_DOMAIN} --report
 $COMPOSER_VENDOR_DIR/bin/diffFilter --phpcsStrict $commit_diff_filename phpcs.json 100
 $COMPOSER_VENDOR_DIR/bin/wp-l10n-validator -1c ${TEXT_DOMAIN} .wp-l10n-validator -- $PHP_FILES
 
+pmc-install-wp
 pmc-install-wp-phpunit
 pmc-install-xdebug
 
