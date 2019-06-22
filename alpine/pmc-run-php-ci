@@ -1,0 +1,36 @@
+#!/bin/sh
+
+apk add jq git
+
+commit=$(git rev-parse --short HEAD)
+coverage_filename="/tmp/coverage-${WORDPRESS_THEME}-${commit}.xml"
+commit_diff_filename="/tmp/commit-${commit}.diff"
+codecov_filename="codecov-coverage-$(git rev-parse --short HEAD)"
+codecov_repo_token=$(curl -X GET --silent "https://codecov.io/api/bb/${ORG}/${WORDPRESS_THEME}" -H "Authorization: token ${CODECOV_AUTH_TOKEN}" | jq -r '.repo.upload_token')
+
+# Master has different rules because it can't compare against itself and needs to only test the latest commit
+if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
+	then
+		# Make a file for the commit diff to read into tests a variable is too large
+		(git --no-pager diff --diff-filter=d --no-commit-id $(git rev-parse --short HEAD^) > $commit_diff_filename)
+		export PHP_FILES="$(git --no-pager diff --diff-filter=d --no-commit-id --namr-only ${COMMIT}^ -- '*.php')"
+	else
+		(git --no-pager diff origin/master --diff-filter=d --no-commit-id) > $commit_diff_filename
+		export PHP_FILES="$(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php')"
+fi
+
+for i in $PHP_FILES; do php -l $i; done
+$COMPOSER_VENDOR_DIR/bin/phpcs --config-set default_standard "${PHPCS_STANDARD}"
+$COMPOSER_VENDOR_DIR/bin/phpcs --runtime-set text_domain ${TEXT_DOMAIN} --report=json $PHP_FILES > phpcs.json
+$COMPOSER_VENDOR_DIR/bin/diffFilter --phpcsStrict $commit_diff_filename phpcs.json 100
+$COMPOSER_VENDOR_DIR/bin/wp-l10n-validator -1c ${TEXT_DOMAIN} .wp-l10n-validator -- $PHP_FILES
+
+pmc-install-wp-phpunit
+pmc-install-xdebug
+
+$COMPOSER_VENDOR_DIR/bin/phpunit -v --exclude-group pmc-phpunit-ignore-failed --coverage-clover=${coverage_filename}
+$COMPOSER_VENDOR_DIR/bin/diffFilter --phpunit $commit_diff_filename ${coverage_filename}
+
+if [ -n "${codecov_repo_token}" ]
+	then curl -s https://codecov.io/bash | bash -s -- -t "${codecov_repo_token}" -c -B "$(git rev-parse --abbrev-ref HEAD)" -n "${codecov_filename}" -f "${codecov_filename}" -F unittests
+fi
