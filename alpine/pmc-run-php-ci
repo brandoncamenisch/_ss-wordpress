@@ -28,7 +28,7 @@ $COMPOSER_VENDOR_DIR/bin/wp-l10n-validator -1c ${TEXT_DOMAIN} .wp-l10n-validator
 pmc-install-wp-phpunit
 pmc-install-xdebug
 
-$COMPOSER_VENDOR_DIR/bin/phpunit -v --exclude-group pmc-phpunit-ignore-failed --coverage-clover=${coverage_filename}
+$COMPOSER_VENDOR_DIR/bin/phpunit -v --exclude-group ${PHPUNIT_EXCLUDE_GROUPS} --coverage-clover=${coverage_filename}
 $COMPOSER_VENDOR_DIR/bin/diffFilter --phpunit $commit_diff_filename ${coverage_filename}
 
 if [ -n "${codecov_repo_token}" ]
