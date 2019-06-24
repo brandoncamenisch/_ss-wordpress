@@ -14,6 +14,15 @@ RUN unzip /tmp/master.zip -d /tmp && mv /tmp/_ss-wordpress-master/alpine/* /usr/
  command: >
       sh -c "pmc-run-{php|npm}-ci"
 ```
+OR
+```
+ command: >
+      sh -c "curl -L https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/master/alpine/php/_ss-* | /bin/sh
+```
+## USAGE VIA CURL
+```
+curl -L https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/master/alpine/php/_ss-* | /bin/sh
+```
 
 ## ENVRIONMENT VARIABLES
 
