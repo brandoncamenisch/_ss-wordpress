@@ -24,10 +24,6 @@ $COMPOSER_VENDOR_DIR/bin/phpcs --config-set default_standard "${PHPCS_STANDARD}"
 $COMPOSER_VENDOR_DIR/bin/phpcs --runtime-set text_domain ${TEXT_DOMAIN} --report=json $PHP_FILES > /tmp/phpcs.json
 $COMPOSER_VENDOR_DIR/bin/diffFilter --phpcsStrict $commit_diff_filename /tmp/phpcs.json 100
 $COMPOSER_VENDOR_DIR/bin/wp-l10n-validator -1c ${TEXT_DOMAIN} .wp-l10n-validator -- $PHP_FILES
-
-pmc-install-wp-phpunit
-pmc-install-xdebug
-
 $COMPOSER_VENDOR_DIR/bin/phpunit -v --exclude-group ${PHPUNIT_EXCLUDE_GROUPS} --coverage-clover=${coverage_filename}
 $COMPOSER_VENDOR_DIR/bin/diffFilter --phpunit $commit_diff_filename ${coverage_filename}
 
