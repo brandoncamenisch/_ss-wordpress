@@ -7,7 +7,7 @@ if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
 	then
 		# Make a file for the commit diff to read into tests a variable is too large
 		(git --no-pager diff --diff-filter=d --no-commit-id $(git rev-parse --short HEAD^) > $COMMIT_DIFF_FILENAME)
-		export PHP_FILES="$(git --no-pager diff --diff-filter=d --no-commit-id --namr-only ${COMMIT}^ -- '*.php')"
+		export PHP_FILES="$(git --no-pager diff --diff-filter=d --no-commit-id --name-only ${COMMIT}^ -- '*.php')"
 	else
 		(git --no-pager diff origin/master --diff-filter=d --no-commit-id) > $COMMIT_DIFF_FILENAME
 		export PHP_FILES="$(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php')"
