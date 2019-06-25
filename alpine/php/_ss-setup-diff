@@ -1,6 +1,6 @@
 #!/bin/sh
 export COMMIT=$(git rev-parse --short HEAD)
-export COMMIT_DIFF_FILENAME="/tmp/commit-${commit}.diff"
+export COMMIT_DIFF_FILENAME="/tmp/commit-${COMMIT}.diff"
 
 # Master has different rules because it can't compare against itself and needs to only test the latest commit
 if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
