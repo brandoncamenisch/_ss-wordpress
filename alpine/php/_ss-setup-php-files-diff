@@ -8,8 +8,8 @@ if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
 	then
 		# Make a file for the commit diff to read into tests a variable is too large
 		(git --no-pager diff --diff-filter=d --no-commit-id $(git rev-parse --short HEAD^) > $commit_diff)
-		(git --no-pager diff --diff-filter=d --no-commit-id --name-only ${commit}^ -- '*.php' > $php_files_diff
+		(git --no-pager diff --diff-filter=d --no-commit-id --name-only ${commit}^ -- '*.php') > $php_files_diff
 	else
 		(git --no-pager diff origin/master --diff-filter=d --no-commit-id) > $commit_diff
-		(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php' > $php_files_diff
+		(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php') > $php_files_diff
 fi
