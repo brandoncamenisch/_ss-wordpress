@@ -5,8 +5,6 @@ apk add jq git
 commit=$(git rev-parse --short HEAD)
 coverage_filename="/tmp/coverage-${WORDPRESS_THEME}-${commit}.xml"
 commit_diff_filename="/tmp/commit-${commit}.diff"
-codecov_filename="codecov-coverage-$(git rev-parse --short HEAD)"
-codecov_repo_token=$(curl -X GET --silent "https://codecov.io/api/bb/${ORG}/${WORDPRESS_THEME}" -H "Authorization: token ${CODECOV_AUTH_TOKEN}" | jq -r '.repo.upload_token')
 
 # Master has different rules because it can't compare against itself and needs to only test the latest commit
 if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
@@ -27,6 +25,3 @@ $COMPOSER_VENDOR_DIR/bin/wp-l10n-validator -1c ${TEXT_DOMAIN} .wp-l10n-validator
 $COMPOSER_VENDOR_DIR/bin/phpunit -v --exclude-group ${PHPUNIT_EXCLUDE_GROUPS} --coverage-clover=${coverage_filename}
 $COMPOSER_VENDOR_DIR/bin/diffFilter --phpunit $commit_diff_filename ${coverage_filename}
 
-if [ -n "${codecov_repo_token}" ]
-	then curl -s https://codecov.io/bash | bash -s -- -t "${codecov_repo_token}" -c -B "$(git rev-parse --abbrev-ref HEAD)" -n "${codecov_filename}" -f "${codecov_filename}" -F unittests
-fi
