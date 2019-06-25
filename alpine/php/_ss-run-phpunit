@@ -1,0 +1,5 @@
+#!/bin/sh
+coverage_filename="/tmp/coverage-${WORDPRESS_THEME}-${commit}.xml"
+$COMPOSER_VENDOR_DIR/bin/phpunit -v --exclude-group ${PHPUNIT_EXCLUDE_GROUPS} --coverage-clover=${coverage_filename}
+$COMPOSER_VENDOR_DIR/bin/diffFilter --phpunit $commit_diff_filename ${coverage_filename}
+

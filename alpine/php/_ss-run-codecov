@@ -1,4 +1,5 @@
 #!/bin/sh
+apk add jq git
 codecov_filename="codecov-coverage-$(git rev-parse --short HEAD)"
 codecov_repo_token=$(curl -X GET --silent "https://codecov.io/api/bb/${ORG}/${WORDPRESS_THEME}" -H "Authorization: token ${CODECOV_AUTH_TOKEN}" | jq -r '.repo.upload_token')
 if [ -n "${codecov_repo_token}" ]
