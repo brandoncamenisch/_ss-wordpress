@@ -1,6 +1,5 @@
 #!/bin/sh
 set -x
-#@TODO REMOVE THIS FROM THIS PROJECT
 export PATH=$(npm bin):$PATH
 apk add git
 
