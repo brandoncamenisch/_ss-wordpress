@@ -1,11 +1,11 @@
 #!/bin/sh
-touch ${PHP_FILES_DIFF}
+touch ${PHP_DIFF_FILE}
 
 # Master has different rules because it can't compare against itself and needs to only test the latest commit
 if [ "master" = "$(git rev-parse --abbrev-ref HEAD)" ]
 	then
 		# Make a file for the commit diff to read into tests a variable is too large
-		(git --no-pager diff --diff-filter=d --no-commit-id --name-only "$(git rev-parse --short HEAD^)" -- '*.php') >> "${PHP_FILES_DIFF}"
+		(git --no-pager diff --diff-filter=d --no-commit-id --name-only "$(git rev-parse --short HEAD^)" -- '*.php') >> "${PHP_DIFF_FILE}"
 	else
-		(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php') >> "${PHP_FILES_DIFF}"
+		(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php') >> "${PHP_DIFF_FILE}"
 fi
