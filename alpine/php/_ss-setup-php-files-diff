@@ -4,7 +4,7 @@
 if [ "master" = "$(git rev-parse --abbrev-ref HEAD)" ]
 	then
 		# Make a file for the commit diff to read into tests a variable is too large
-		(git --no-pager diff --diff-filter=d --no-commit-id --name-only "$(git rev-parse --short HEAD^)" -- '*.php') >ccc2> "${PHP_FILES}"
+		(git --no-pager diff --diff-filter=d --no-commit-id --name-only "$(git rev-parse --short HEAD^)" -- '*.php') >> "${PHP_FILES}"
 	else
 		(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php') >> "${PHP_FILES}"
 fi
