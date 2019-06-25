@@ -1,9 +1,7 @@
 #!/bin/sh
 set -x
-apk add jq git
 
 commit=$(git rev-parse --short HEAD)
-coverage_filename="/tmp/coverage-${WORDPRESS_THEME}-${commit}.xml"
 commit_diff_filename="/tmp/commit-${commit}.diff"
 
 # Master has different rules because it can't compare against itself and needs to only test the latest commit
@@ -16,12 +14,3 @@ if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
 		(git --no-pager diff origin/master --diff-filter=d --no-commit-id) > $commit_diff_filename
 		export PHP_FILES="$(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php')"
 fi
-
-for i in $PHP_FILES; do php -l $i; done
-$COMPOSER_VENDOR_DIR/bin/phpcs --config-set default_standard "${PHPCS_STANDARD}"
-$COMPOSER_VENDOR_DIR/bin/phpcs --runtime-set text_domain ${TEXT_DOMAIN} --report=json $PHP_FILES > /tmp/phpcs.json
-$COMPOSER_VENDOR_DIR/bin/diffFilter --phpcsStrict $commit_diff_filename /tmp/phpcs.json 100
-$COMPOSER_VENDOR_DIR/bin/wp-l10n-validator -1c ${TEXT_DOMAIN} .wp-l10n-validator -- $PHP_FILES
-$COMPOSER_VENDOR_DIR/bin/phpunit -v --exclude-group ${PHPUNIT_EXCLUDE_GROUPS} --coverage-clover=${coverage_filename}
-$COMPOSER_VENDOR_DIR/bin/diffFilter --phpunit $commit_diff_filename ${coverage_filename}
-
