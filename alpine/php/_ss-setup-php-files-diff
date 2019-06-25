@@ -1,8 +1,8 @@
 #!/bin/sh
 mkdir -p /tmp
 echo $COMMIT_DIFF
-touch "${COMMIT_DIFF}"
-touch "${PHP_FILES}"
+touch $COMMIT_DIFF
+touch $PHP_FILES
 # Master has different rules because it can't compare against itself and needs to only test the latest commit
 if [ "master" = "$(git rev-parse --abbrev-ref HEAD)" ]
 	then
