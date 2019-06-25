@@ -13,4 +13,3 @@ if [ "master" = "$(git rev-parse --abbrev-ref HEAD)" ]
 		(git --no-pager diff origin/master --diff-filter=d --no-commit-id) > "${commit_diff}"
 		(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php' > "${php_files_diff}")
 fi
-cat $php_files_diff
