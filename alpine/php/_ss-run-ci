@@ -1,14 +1,14 @@
 #!/bin/sh
-commit=$(git rev-parse --short HEAD)
-commit_diff_filename="/tmp/commit-${commit}.diff"
+export COMMIT=$(git rev-parse --short HEAD)
+export COMMIT_DIFF_FILENAME="/tmp/commit-${commit}.diff"
 
 # Master has different rules because it can't compare against itself and needs to only test the latest commit
 if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
 	then
 		# Make a file for the commit diff to read into tests a variable is too large
-		(git --no-pager diff --diff-filter=d --no-commit-id $(git rev-parse --short HEAD^) > $commit_diff_filename)
+		(git --no-pager diff --diff-filter=d --no-commit-id $(git rev-parse --short HEAD^) > $COMMIT_DIFF_FILENAME)
 		export PHP_FILES="$(git --no-pager diff --diff-filter=d --no-commit-id --namr-only ${COMMIT}^ -- '*.php')"
 	else
-		(git --no-pager diff origin/master --diff-filter=d --no-commit-id) > $commit_diff_filename
+		(git --no-pager diff origin/master --diff-filter=d --no-commit-id) > $COMMIT_DIFF_FILENAME
 		export PHP_FILES="$(git --no-pager diff origin/master --diff-filter=d --name-only -- '*.php')"
 fi
