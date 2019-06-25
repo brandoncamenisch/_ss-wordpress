@@ -1,2 +1,3 @@
 #!/bin/sh
+echo $PHP_FILES
 for i in $PHP_FILES; do php -l $i; done
