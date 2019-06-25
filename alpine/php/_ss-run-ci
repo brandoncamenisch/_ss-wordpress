@@ -1,6 +1,4 @@
 #!/bin/sh
-set -x
-
 commit=$(git rev-parse --short HEAD)
 commit_diff_filename="/tmp/commit-${commit}.diff"
 

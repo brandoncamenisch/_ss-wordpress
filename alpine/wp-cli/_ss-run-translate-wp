@@ -1,5 +1,4 @@
 #!/bin/sh
-
 wp-pot \
 $(find -name "*.php" -not -path "./tests/*" -not -path "./vendor/*" | awk '{print "--src " $1}') \
 --dest-file "languages/${TEXT_DOMAIN}.pot" \
