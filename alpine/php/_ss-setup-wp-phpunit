@@ -5,7 +5,9 @@
 wp_tests_dir="${WEB_ROOT}/wp-tests"
 wp_tests_config="${wp_tests_dir}/wp-tests-config.php"
 
-mkdir ${wp_tests_dir}
+if [ ! -d "${wp_tests_dir}" ]
+	then mkdir ${wp_tests_dir}
+fi
 
 # Get the version(s) we want from GH origin
 git -C ${wp_tests_dir} init
