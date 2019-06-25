@@ -1,2 +1,2 @@
 #!/bin/sh
-for i in $(cat $PHP_FILES_DIFF); do php -l $i; done
+for i in $PHP_FILES_DIFF; do php -l $i; done
