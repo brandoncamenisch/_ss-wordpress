@@ -1,5 +1,4 @@
 #!/bin/sh
-apk add git
 export PATH=$(npm bin):$PATH
 if [ 'master' == $(git rev-parse --abbrev-ref HEAD) ]
 	then lint-diff HEAD^..HEAD
