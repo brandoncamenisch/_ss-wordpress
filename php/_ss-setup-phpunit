@@ -5,8 +5,10 @@
 wp_tests_dir="${WEB_ROOT}/wp-tests"
 wp_tests_config="${wp_tests_dir}/wp-tests-config.php"
 
-if [ ! -d "${wp_tests_dir}" ]
-	then mkdir ${wp_tests_dir}
+if [ -d "${wp_tests_dir}" ]
+	then rm -rm ${wp_tests_dir} && mkdir ${wp_tests_dir}
+fi
+
 	# Get the version(s) we want from GH origin
 	git -C ${wp_tests_dir} init
 	git -C ${wp_tests_dir} remote add origin https://github.com/WordPress/wordpress-develop.git
@@ -32,5 +34,3 @@ if [ ! -d "${wp_tests_dir}" ]
 	echo "define( 'WP_TESTS_CONFIG_FILE_PATH', '$wp_tests_dir');" >> $wp_tests_config
 	# PMC?
 	echo "define( 'WP_TESTS_DIR', '$wp_tests_dir');" >> $wp_tests_config
-fi
-
