@@ -5,8 +5,8 @@
 wp_tests_dir="${WEB_ROOT}/wp-tests"
 wp_tests_config="${wp_tests_dir}/wp-tests-config.php"
 
-if [ ! -d "${wp_tests_dir}" ]
-	then mkdir "${wp_tests_dir}"
+if [ ! -d "${wp_tests_dir}/.git" ]; then
+	mkdir "${wp_tests_dir}"
 	# Get the version(s) we want from GH origin
 	git -C "${wp_tests_dir}" init
 	git -C "${wp_tests_dir}" remote add origin https://github.com/WordPress/wordpress-develop.git
