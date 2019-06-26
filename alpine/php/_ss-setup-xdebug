@@ -1,8 +1,4 @@
 #!/bin/sh
-apk add --no-cache $PHPIZE_DEPS
-pecl install -f xdebug
-docker-php-ext-enable xdebug
-
 echo "xdebug.idekey=${XDEBUG_IDEKEY}" >> /usr/local/etc/php/conf.d/xdebug.ini
 echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/xdebug.ini && \
 echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini && \
