@@ -6,7 +6,8 @@ wp_tests_dir="${WEB_ROOT}/wp-tests"
 wp_tests_config="${wp_tests_dir}/wp-tests-config.php"
 
 if [ -d "${wp_tests_dir}" ]
-	then rm -rm ${wp_tests_dir} && mkdir ${wp_tests_dir}
+	then rm -rf ${wp_tests_dir} && mkdir ${wp_tests_dir}
+	else mkdir ${wp_tests_dir}
 fi
 
 	# Get the version(s) we want from GH origin
