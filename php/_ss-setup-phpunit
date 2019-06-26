@@ -5,17 +5,16 @@
 wp_tests_dir="${WEB_ROOT}/wp-tests"
 wp_tests_config="${wp_tests_dir}/wp-tests-config.php"
 
-if [ -d "${wp_tests_dir}" ]
-	then rm -rf ${wp_tests_dir} && mkdir ${wp_tests_dir}
-	else mkdir ${wp_tests_dir}
+if [ ! -d "${wp_tests_dir}" ]
+	then mkdir "${wp_tests_dir}"
 fi
 
 	# Get the version(s) we want from GH origin
-	git -C ${wp_tests_dir} init
-	git -C ${wp_tests_dir} remote add origin https://github.com/WordPress/wordpress-develop.git
-	git -C ${wp_tests_dir} fetch --depth 1 origin ${WORDPRESS_VERSION}
-	git -C ${wp_tests_dir} checkout "origin/${WORDPRESS_VERSION}" -- tests/phpunit/includes wp-tests-config-sample.php src
-	cp -v ${wp_tests_dir}/wp-tests-config-sample.php ${wp_tests_config}
+	git -C "${wp_tests_dir}" init
+	git -C "${wp_tests_dir}" remote add origin https://github.com/WordPress/wordpress-develop.git
+	git -C "${wp_tests_dir}" fetch --depth 1 origin "${WORDPRESS_VERSION}"
+	git -C "${wp_tests_dir}" checkout "origin/${WORDPRESS_VERSION}" -- tests/phpunit/includes wp-tests-config-sample.php src
+	cp -v "${wp_tests_dir}/wp-tests-config-sample.php" "${wp_tests_config}"
 
 	# Replace wjith configurable tests variables
 	sed -i  "s|dirname( __FILE__ ) . '/src/'|'$WEB_ROOT/'|" $wp_tests_config
