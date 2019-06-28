@@ -1,6 +1,6 @@
 #!/bin/sh
 docker network create pmc-dev_default
-docker-compose build --force-rm --compress
+docker-compose build --force-rm --compress --parallel --pull
 docker-compose run --rm pipeline-npm-build
 docker-compose run --rm pipeline-composer-build
 docker-compose run --rm -d wp
