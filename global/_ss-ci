@@ -1,3 +1,4 @@
 #!/bin/sh
 docker network create pmc-dev_default
 docker-compose up -d --remove-orphans --force-recreate --build
+docker-compose run --rm test-php
