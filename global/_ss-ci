@@ -1,7 +1,9 @@
 #!/bin/sh
 docker network create pmc-dev_default
 docker-compose build --force-rm --compress --parallel --pull
+docker-compose run --rm build-npm
 docker-compose run --rm build-php
 docker-compose run --rm -d wp
 docker-compose stop wp
+docker-compose run --rm test-npm
 docker-compose run --rm test-php
