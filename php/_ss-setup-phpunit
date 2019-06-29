@@ -32,5 +32,3 @@ echo "define( 'LOGGED_IN_COOKIE', false );" >> $wp_tests_config
 echo "define( 'WP_RUN_CORE_TESTS', '$wp_tests_dir');" >> $wp_tests_config
 # OFFICIAL
 echo "define( 'WP_TESTS_CONFIG_FILE_PATH', '$wp_tests_dir');" >> $wp_tests_config
-# PMC?
-echo "define( 'WP_TESTS_DIR', '$wp_tests_dir');" >> $wp_tests_config
