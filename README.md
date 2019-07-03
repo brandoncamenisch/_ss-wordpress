@@ -15,15 +15,15 @@ RUN unzip /tmp/master.zip "*.sh" -d /usr/bin/
 OR
 ```
  command: >
-      sh -c "curl -L https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/master/alpine/php/_ss-* | sh
+      sh -c "curl -L https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/*/_ss-*.sh | sh
 ```
 ## USAGE VIA CURL
 ```
-curl -L https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/master/alpine/php/_ss-* | sh
+curl -L https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/*/_ss-*.sh | sh
 ```
 ## USAGE VIA WGET
 ```
-wget -O - https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/master/alpine/php/_ss-* | sh
+wget -O - https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/*/_ss-*.sh | sh
 ```
 ## ENVRIONMENT VARIABLES
 For the most up to date list of environment variables [see this](https://github.com/penske-media-corp/generator-pmc/generators/docker/templates/wp/.env)
