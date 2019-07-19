@@ -26,6 +26,6 @@ curl -L https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/*/_ss-
 wget -O - https://raw.githubusercontent.com/penske-media-corp/_ss-wordpress/*/_ss-*.sh | sh
 ```
 ## ENVRIONMENT VARIABLES
-For the most up to date list of environment variables [see this](https://github.com/penske-media-corp/generator-pmc/generators/docker/templates/wp/.env)
+For the most up to date list of environment variables available for use [see this](https://github.com/penske-media-corp/generator-pmc/generators/docker/templates/wp/.env)
 
 ## USAGE VIA GITHOOKS
