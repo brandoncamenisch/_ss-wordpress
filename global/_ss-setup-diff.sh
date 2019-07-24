@@ -1,7 +1,4 @@
 #!/bin/sh
-
-# Update refs for BB
-git fetch --quiet origin +refs/heads/*:refs/remotes/origin/*
 # Master has different rules because it can't compare against itself and needs to only test the latest commit
 if [ "master" = "$(git rev-parse --abbrev-ref HEAD)" ]
 	then
