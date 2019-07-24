@@ -1,9 +1,9 @@
 #!/bin/sh
 docker network create pmc-dev_default
 docker-compose up -d --remove-orphans --force-recreate --build
-docker-compose run build-npm
-docker-compose run test-npm
-docker-compose run build-php
+docker-compose run --rm build-npm
+docker-compose run --rm test-npm
+docker-compose run --rm build-php
 docker-compose run \
 -e BITBUCKET_BRANCH=$BITBUCKET_BRANCH \
 -e BITBUCKET_CLONE_DIR=$BITBUCKET_CLONE_DIR \
